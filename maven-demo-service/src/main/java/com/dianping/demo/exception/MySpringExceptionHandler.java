@@ -10,7 +10,7 @@ import org.apache.avalon.framework.parameters.ParameterException;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-public class MyExceptionHandler implements HandlerExceptionResolver{
+public class MySpringExceptionHandler implements HandlerExceptionResolver{
 
 	public ModelAndView resolveException(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception ex) {
@@ -20,15 +20,22 @@ public class MyExceptionHandler implements HandlerExceptionResolver{
 		Map<String, Object> model = new HashMap<String, Object>();
 		
 		model.put("ex", ex.getMessage());
-		model.put("result", "业务处理异常");
 		
 		if(ex instanceof BusinessException){
 			
+			model.put("result", "业务处理异常");
+			
 			return new ModelAndView("error-business",model);
+			
 		}else if(ex instanceof ParameterException){
 			
+			model.put("result", "参数异常");
+			
 			return new ModelAndView("error-parameter",model);
+			
 		}else{
+			
+			model.put("result", "未知异常");
 			
 			return new ModelAndView("error",model);
 		}

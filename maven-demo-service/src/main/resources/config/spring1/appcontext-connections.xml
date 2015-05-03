@@ -10,12 +10,14 @@
 
 	<context:property-placeholder
 		location="classpath:config/applicationContext.properties" />
-		
-	
+
+
 	<bean id="dpPOIdataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<property name="driverClassName" value="${poi-datainput-service.jdbc.driverClassName}"></property>
-		<property name="url" value="${poi-datainput-service.local.jdbc.databaseurl}"></property>
+		<property name="driverClassName"
+			value="${poi-datainput-service.jdbc.driverClassName}"></property>
+		<property name="url"
+			value="${poi-datainput-service.local.jdbc.databaseurl}"></property>
 		<property name="username" value="${poi-datainput-service.local.username}"></property>
 		<property name="password" value="${poi-datainput-service.local.password}"></property>
 		<!--maxActive: 最大连接数量 -->
@@ -36,27 +38,43 @@
 		<property name="maxWait" value="10000" />
 	</bean>
 
-	
+
 	<bean id="dpPOIsqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dpPOIdataSource" />
 		<property name="mapperLocations" value="classpath*:config/sqlmap/dppoi/*.xml" />
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageHelper">
+					<property name="properties">
+						<value>
+							dialect=mysql
+							reasonable=true
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property>
 	</bean>
 
-	
+
 	<bean id="dpPOItransactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dpPOIdataSource" />
 	</bean>
-	
-	<bean id="dpPOIsqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+
+	<bean id="dpPOIsqlSession" class="org.mybatis.spring.SqlSessionTemplate"
+		destroy-method="clearCache">
 		<constructor-arg index="0" ref="dpPOIsqlSessionFactory" />
 		<constructor-arg index="1" value="BATCH" />
 	</bean>
-   
-   <bean id="dpPOIScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+
+	<bean id="dpPOIScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.dianping.poi.datainput.mapper.dppoi" />
 		<!-- <property name="sqlSessionFactoryBeanName" value="dpPOIsqlSessionFactory"/> -->
-		<property name="sqlSessionTemplateBeanName" value="dpPOIsqlSession"/>
+		<property name="sqlSessionTemplateBeanName" value="dpPOIsqlSession" />
 	</bean>
+
+	<!-- 开启事务注解驱动 -->
+	<tx:annotation-driven transaction-manager="dpPOItransactionManager" />
 
 </beans>

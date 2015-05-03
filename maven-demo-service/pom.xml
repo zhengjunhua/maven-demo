@@ -24,7 +24,7 @@
 			<artifactId>maven-demo-api</artifactId>
 			<version>0.0.1</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
@@ -267,52 +267,82 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
-		
-		
+
+
+
 		<!-- new -->
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>${spring.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>3.4.1</version>
+		</dependency>
 		
-		<dependency>  
-            <groupId>org.springframework</groupId>  
-            <artifactId>spring-orm</artifactId>  
-            <version>${spring.version}</version>  
-            <type>jar</type>  
-            <scope>compile</scope>  
-        </dependency>  
-        <dependency>  
-            <groupId>org.springframework</groupId>  
-            <artifactId>spring-oxm</artifactId>  
-            <version>${spring.version}</version>  
-            <type>jar</type>  
-            <scope>compile</scope>  
-        </dependency>  
-        <dependency>  
-            <groupId>org.springframework</groupId>  
-            <artifactId>spring-webmvc</artifactId>  
-            <version>${spring.version}</version>  
-            <type>jar</type>  
-            <scope>compile</scope>  
-        </dependency>  
-        <dependency>  
-            <groupId>org.springframework</groupId>  
-            <artifactId>spring-test</artifactId>  
-            <version>${spring.version}</version>  
-            <type>jar</type>  
-            <scope>compile</scope>  
-        </dependency>  
-  
-        <dependency>  
-            <groupId>commons-collections</groupId>  
-            <artifactId>commons-collections</artifactId>  
-            <version>3.1</version>  
-        </dependency>  
-  
-        <dependency>  
-            <groupId>commons-logging</groupId>  
-            <artifactId>commons-logging</artifactId>  
-            <version>1.1</version>  
-        </dependency>  
-		
+
 	</dependencies>
 	<build>
 		<finalName>maven-demo-service</finalName>

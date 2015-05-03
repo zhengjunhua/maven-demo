@@ -30,7 +30,7 @@
 		<!-- <table tableName="TB_TREE" domainObjectName="TBTree" >
 			<property name="useActualColumnNames" value="false"/>
 		</table> -->
-		<table tableName="USER_ROLE" domainObjectName="UserRole" >
+		<table tableName="article" domainObjectName="Article" >
 			<property name="useActualColumnNames" value="false"/>
 		</table>
 	</context>
