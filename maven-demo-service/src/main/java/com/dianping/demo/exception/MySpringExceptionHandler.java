@@ -3,19 +3,20 @@ package com.dianping.demo.exception;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.avalon.framework.parameters.ParameterException;
-import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
-public class MySpringExceptionHandler implements HandlerExceptionResolver{
+@ControllerAdvice
+public class MySpringExceptionHandler{
 
-	public ModelAndView resolveException(HttpServletRequest request,
-			HttpServletResponse response, Object handler, Exception ex) {
+	@ExceptionHandler(Exception.class)
+	public ModelAndView resolveException(Exception ex) {
 		
 		System.out.println("enter into MyExceptionHandler");
+		
+		ex.printStackTrace();
 		
 		Map<String, Object> model = new HashMap<String, Object>();
 		

@@ -13,10 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dianping.demo.ioc.IOCBeanFactory;
 import com.dianping.poi.datainput.mapper.dppoi.ArticleMapper;
 import com.dianping.poi.datainput.mapper.dppoi.TestUserMapper;
 import com.dianping.poi.datainput.module.dppoi.TestUser;
@@ -27,8 +29,7 @@ import com.dianping.poi.datainput.module.query.dppoi.TestUserArticleListQuery;
 @RequestMapping("/testmybatis") 
 public class TestMyBatisController{
 
-	@Autowired
-	private TestUserMapper testUserMapper;
+	private TestUserMapper testUserMapper = (TestUserMapper) IOCBeanFactory.getBean("testUserMapper");;
 	
 	@Autowired
 	private ArticleMapper articleMapper;
@@ -125,7 +126,8 @@ public class TestMyBatisController{
 	}
 	
 	@RequestMapping("/addTestUser")
-	public ModelAndView addTestUser(TestUser user){
+	@ResponseBody
+	public Map<String, Object> addTestUser(@RequestBody TestUser user){
 		
 		int affectCount = testUserMapper.addTestUser(user);
 		//int affectCount = testUserMapper.insertSelective(user);
@@ -136,8 +138,9 @@ public class TestMyBatisController{
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
 		resultMap.put("affectCount", affectCount);
+		resultMap.put("result", "新增成功");
 		
-		return new ModelAndView("TestMyBatisResult",resultMap);
+		return resultMap;
 		
 	}
 	
